@@ -1,0 +1,7 @@
+name: 'My Custom Fields'
+type: module
+description: 'Adds custom base fields to entities.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - drupal:node

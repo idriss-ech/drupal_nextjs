@@ -1,0 +1,31 @@
+<?php
+
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function my_custom_fields_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  // Add a field to node entities only.
+  if ($entity_type->id() === 'node') {
+    $fields['custom_text'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Custom Text'))
+      ->setDescription(t('A custom text field for demonstration.'))
+      ->setSettings([
+        'max_length' => 255,
+      ])
+      ->setRequired(FALSE)
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => 100,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  return $fields;
+}
